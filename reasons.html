@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>22 Reasons — Anuksha</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.1rem;
+    margin-top: 3rem;
+  }
+
+  .reason-card {
+    position: relative;
+    padding: 1.6rem 1.5rem 1.4rem;
+    border-radius: 16px;
+    background: linear-gradient(160deg, rgba(122,37,69,0.22), rgba(122,37,69,0.06));
+    border: 1px solid rgba(217,169,78,0.2);
+    transition: transform 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+  }
+
+  .reason-card:hover {
+    transform: translateY(-5px) scale(1.015);
+    border-color: rgba(217,169,78,0.55);
+    background: linear-gradient(160deg, rgba(122,37,69,0.32), rgba(122,37,69,0.1));
+  }
+
+  .reason-num {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gold);
+    opacity: 0.85;
+  }
+
+  .reason-text {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--blush-soft);
+  }
+</style>
+</head>
+<body>
+
+<div id="hearts-layer"></div>
+
+<nav class="site-nav">
+  <span class="brand">A.</span>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="letter.html">Love Letter</a></li>
+    <li><a href="reasons.html">22 Reasons</a></li>
+    <li><a href="wishes.html">Wishes</a></li>
+    <li><a href="surprise.html">Surprise</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section class="center">
+    <p class="eyebrow">one for every year</p>
+    <h1 style="font-size: clamp(2rem, 6vw, 3rem); margin-top: 0.6rem; font-style: italic;">
+      22 Reasons I Love You
+    </h1>
+    <p style="max-width: 480px; margin: 1rem auto 0; color: var(--blush-soft); font-size: 0.98rem;">
+      I tried to stop at ten. I couldn't. Here's one for every year you've
+      been making the world better.
+    </p>
+  </section>
+
+  <div class="reasons-grid" id="reasonsGrid"></div>
+</main>
+
+<footer class="site-footer">
+  made with a <span class="heart">♥</span> for Anuksha
+</footer>
+
+<script src="script.js"></script>
+<script>
+  const reasons = [
+    "The way you say 'okay but hear me out' right before the best idea in the room.",
+    "You remember how people take their coffee after meeting them once.",
+    "Your laugh has an actual crescendo. Science should study it.",
+    "You apologize to inanimate objects when you bump into them.",
+    "You've never once let me win an argument I didn't earn.",
+    "The playlists you make have better transitions than most DJs.",
+    "You call your mum back within the hour, every single time.",
+    "You root for the underdog in literally everything, always.",
+    "Your handwriting somehow gets neater the angrier the note.",
+    "You've read the last page of a book early exactly once, and still won't admit it.",
+    "You make plans nine months out and actually keep them.",
+    "You've never met a stray animal you didn't try to befriend.",
+    "You say exactly what you mean, even when it's inconvenient.",
+    "Your 2 a.m. thoughts are somehow more coherent than my 2 p.m. ones.",
+    "You still get excited about fireflies. Every year. Same excitement.",
+    "You keep receipts — for warranties, not for arguments.",
+    "You've never once made me feel small for asking a question.",
+    "Your competitive streak comes out only during board games, thankfully.",
+    "You notice when someone's quiet in a group and check on them later.",
+    "You've kept every ticket stub from every plan we've ever made.",
+    "You make ordinary Tuesdays feel like they were worth showing up for.",
+    "You are, simply, my favourite person to tell things to first.",
+  ];
+
+  const grid = document.getElementById('reasonsGrid');
+  reasons.forEach((text, i) => {
+    const card = document.createElement('div');
+    card.className = 'reason-card reveal';
+    card.innerHTML = `<div class="reason-num">${String(i + 1).padStart(2, '0')}</div>
+                       <div class="reason-text">${text}</div>`;
+    grid.appendChild(card);
+  });
+
+  // re-run reveal observer for dynamically added cards
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reason-card').forEach((c) => io.observe(c));
+</script>
+
+<div class="center" style="position: relative; z-index: 2; margin-top: -3rem; padding-bottom: 2rem;">
+  <a href="wishes.html" class="btn btn-outline">Next: Birthday Wishes →</a>
+</div>
+
+</body>
+</html>
